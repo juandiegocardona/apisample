@@ -74,24 +74,21 @@ HandlerGenerator = new HandlerGenerator();
 
 /* GET home page. */
 router.get('/', middleware.checkToken, HandlerGenerator.index);
-
 router.post( '/login', HandlerGenerator.login);
-
-router.post("/usuario", function (req, res, next) {
-  const { error } = schemaUsuario.validate(req.body);
+router.post("/user", function (req, res, next) {
+  const { error } = schemaUser.validate(req.body);
   if (error) {
     return res.status(404).send(error);
   }
-  usuario.createUsuario(req.body).then((usuario) => {
-    console.log("Usuario", usuario);
-    res.send(usuario);
+  user.createUser(req.body).then((user) => {
+    console.log("User", user);
+    res.send(user);
   });
 });
-
-router.get("/usuarios", function (req, res, next) {
-  usuario.getUsuarios().then((usuarios) => {
-    console.log("Usuarios", usuarios);
-    res.send(usuarios);
+router.get("/users", function (req, res, next) {
+  user.getUsers().then((user) => {
+    console.log("Users", user);
+    res.send(user);
   });
 });
 
